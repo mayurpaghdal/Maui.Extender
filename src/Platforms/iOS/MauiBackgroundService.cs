@@ -30,7 +30,7 @@ namespace Maui.Extender.Backgrounding
 
             //We only have 3 minutes in the background service as per iOS 9
             _taskId = UIApplication.SharedApplication.BeginBackgroundTask(nameof(StartLongRunningTaskMessage), Stop);
-            BackgroundAggregatorService.Instance.Start();
+            BackgroundTaskService.Instance.StartJob();
 
             _isRunning = true;
         }
@@ -41,7 +41,7 @@ namespace Maui.Extender.Backgrounding
         public void Stop()
         {
             _isRunning = false;
-            BackgroundAggregatorService.Instance.Stop();
+            BackgroundTaskService.Instance.StopJob();
             UIApplication.SharedApplication.EndBackgroundTask(_taskId);
         }
     }

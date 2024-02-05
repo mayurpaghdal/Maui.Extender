@@ -25,7 +25,7 @@ public class MauiBackgroundSharedService
     public void Start()
     {
         if (_isRunning) return;
-        BackgroundAggregatorService.Instance.Start();
+        BackgroundTaskService.Instance.StartJob();
         _isRunning = true;
     }
 
@@ -35,6 +35,6 @@ public class MauiBackgroundSharedService
     public void Stop()
     {
         _isRunning = false;
-        BackgroundAggregatorService.Instance.Stop();
+        BackgroundTaskService.Instance.StopJob();
     }
 }

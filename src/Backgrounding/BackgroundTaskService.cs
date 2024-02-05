@@ -1,28 +1,17 @@
 ﻿namespace Maui.Extender.Backgrounding;
 
-public partial class BackgroundAggregatorService
+public partial class BackgroundTaskService
 {
-
-    /* Unmerged change from project 'Maui.Extender (net8.0-ios)'
-    Before:
-        private static BackgroundAggregatorService _instance;
-
-        internal static readonly CompositeDisposable EventSubscriptions = [];
-    After:
-        private static BackgroundAggregatorService _instance;
-
-        internal static readonly CompositeDisposable EventSubscriptions = [];
-    */
-    private static BackgroundAggregatorService _instance;
+    private static BackgroundTaskService _instance;
 
     internal static readonly CompositeDisposable EventSubscriptions = [];
     private static readonly Dictionary<string, IPeriodicTask> _schedules = [];
 
-    static BackgroundAggregatorService()
+    static BackgroundTaskService()
     {
     }
 
-    private BackgroundAggregatorService()
+    private BackgroundTaskService()
     {
     }
 
@@ -34,21 +23,21 @@ public partial class BackgroundAggregatorService
             _schedules.Add(typeName, schedule());
     }
 
-    public static void StartBackgroundService()
+    public static void Start()
     {
         var message = new StartLongRunningTaskMessage();
         WeakReferenceMessenger.Default.Send(message);
     }
 
-    public static void StopBackgroundService()
+    public static void Stop()
     {
         var message = new StopLongRunningTaskMessage();
         WeakReferenceMessenger.Default.Send(message);
     }
 
-    public static BackgroundAggregatorService Instance { get; } = _instance ?? (_instance = new BackgroundAggregatorService());
+    public static BackgroundTaskService Instance { get; } = _instance ?? (_instance = new BackgroundTaskService());
 
-    public void Start()
+    public void StartJob()
     {
         foreach (var schedule in _schedules)
         {
@@ -57,7 +46,7 @@ public partial class BackgroundAggregatorService
         }
     }
 
-    public void Stop()
+    public void StopJob()
     {
         EventSubscriptions.Clear();
     }

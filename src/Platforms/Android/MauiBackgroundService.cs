@@ -19,7 +19,7 @@ public class MauiBackgroundService : Service
         if (!_isRunning)
         {
             //RUNNING TASK
-            BackgroundAggregatorService.Instance.Start();
+            BackgroundTaskService.Instance.StartJob();
 
             _isRunning = true;
         }
@@ -30,7 +30,7 @@ public class MauiBackgroundService : Service
     public override void OnDestroy()
     {
         _isRunning = false;
-        BackgroundAggregatorService.Instance.Stop();
+        BackgroundTaskService.Instance.StopJob();
 
         base.OnDestroy();
     }
