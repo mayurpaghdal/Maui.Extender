@@ -1,9 +1,11 @@
-﻿namespace Maui.Extender.Backgrounding;
+﻿using UIKit;
+
+namespace Maui.Extender.Backgrounding;
 
 
 public class BackgroundAggregator
 {
-    public static void Init(MauiUIApplicationDelegate appDelegate)
+    public static void Init(UIApplication appDelegate)
     {
         WeakReferenceMessenger.Default.Register<StartLongRunningTaskMessage>(appDelegate,
                                                                              (r, m) => MauiBackgroundService.Instance.Start());
