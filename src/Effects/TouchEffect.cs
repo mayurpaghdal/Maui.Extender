@@ -645,7 +645,7 @@ public class TouchGestureRecognizerDelegate : UIGestureRecognizerDelegate
 
 public class TouchEffectPlatform : PlatformEffect
 {
-    public bool IsDisposed => (Container as IVisualElementRenderer)?.Element == null;
+    private bool IsDisposed = false;
     public UIView View => Control ?? Container;
 
     UIView _layer;
@@ -678,6 +678,7 @@ public class TouchEffectPlatform : PlatformEffect
         TouchGestureCollector.Delete(View, OnTouch);
         _layer?.RemoveFromSuperview();
         _layer?.Dispose();
+        IsDisposed = true;
     }
 
     void OnTouch(TouchGestureRecognizer.TouchArgs e)
@@ -735,7 +736,7 @@ public class TouchEffectPlatform : PlatformEffect
         if (!IsDisposed && _layer != null)
         {
             _layer.Layer.RemoveAllAnimations();
-            UIView.Animate(0.225,
+            UIView.Animate(0.5,
             () =>
             {
                 _layer.Alpha = 0;

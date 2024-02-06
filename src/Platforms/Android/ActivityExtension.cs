@@ -2,9 +2,9 @@
 
 namespace Maui.Extender.Backgrounding
 {
-    public class BackgroundAggregator
+    internal class BackgroundAggregator
     {
-        public static void Init(ContextWrapper context)
+        internal static void Init(ContextWrapper context)
         {
             WeakReferenceMessenger.Default.Register<StartLongRunningTaskMessage>(context, (r, m) =>
             {

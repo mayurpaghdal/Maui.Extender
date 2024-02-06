@@ -36,7 +36,7 @@ namespace Maui.Extender
 
                     iOSbuilder.FinishedLaunching((app, lanchOptions) =>
                     {
-                        BackgroundAggregator.Init(app);
+                        BackgroundAggregator.Init(app.Delegate);
                         return false;
                     })
                 );
