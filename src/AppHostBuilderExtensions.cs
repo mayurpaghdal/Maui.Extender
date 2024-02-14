@@ -25,21 +25,21 @@ namespace Maui.Extender
             {
 #if ANDROID
                 events.AddAndroid(android =>
-     
+
                     android.OnCreate((activity, savedInstanceState) =>
                     {
                         BackgroundAggregator.Init(activity);
                     })
                 );
-#elif IOS
-                events.AddiOS(iOSbuilder =>
+//#elif IOS
+//                events.AddiOS(iOSbuilder =>
 
-                    iOSbuilder.FinishedLaunching((app, lanchOptions) =>
-                    {
-                        BackgroundAggregator.Init(app.Delegate);
-                        return false;
-                    })
-                );
+//                    iOSbuilder.FinishedLaunching((app, lanchOptions) =>
+//                    {
+//                        BackgroundAggregator.Init(app.Delegate);
+//                        return false;
+//                    })
+//                );
 #endif
 
             });
